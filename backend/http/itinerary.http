@@ -1,0 +1,10 @@
+POST http://localhost:8000/itinerary
+Content-Type: application/json
+
+{
+    "location": "yogyakarta",
+    "duration": 2,
+    "type": "sendirian",
+    "budget": "Rp 5.000.000",
+    "preferences": "kuliner makanan"
+}
