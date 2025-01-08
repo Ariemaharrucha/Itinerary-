@@ -4,6 +4,16 @@ import { Button } from "@/components/ui/button";
 export const WizardNavigation = ({ showNext = true, showBack = true }) => {
   const { nextStep, previousStep, isFirstStep, isLastStep } = useWizard();
 
+  const handleNext = () => {
+    if (isLastStep) {
+      // onSubmit();
+    } else {
+      nextStep(); 
+      console.log(isLastStep);
+    }
+  };
+
+
   return (
     <div className="flex justify-between items-center mt-8">
       {showBack && !isFirstStep && (
@@ -15,13 +25,13 @@ export const WizardNavigation = ({ showNext = true, showBack = true }) => {
           Back
         </Button>
       )}
-      {showNext && !isLastStep && (
+      {showNext  && (
         <Button
           size={"lg"}
           className="ml-auto font-bold text-lg"
-          onClick={nextStep}
+          onClick={handleNext}
         >
-          Next
+          {isLastStep ? "Submit" : "Next"}
         </Button>
       )}
     </div>

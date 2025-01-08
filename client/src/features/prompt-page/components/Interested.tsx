@@ -37,7 +37,7 @@ export const Interested = () => {
         {vacationInterests.map((interest) => (
           <label
             key={interest.value}
-            className="inline-flex items-center gap-2 rounded-full border px-6 py-4 text-base font-semibold has-[:checked]:bg-green-400"
+            className="inline-flex items-center gap-2 rounded-full border px-6 py-4 text-base font-semibold has-[:checked]:bg-green-400 cursor-pointer"
           >
             <input
               type="checkbox"

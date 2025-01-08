@@ -11,7 +11,7 @@ export const PromptPage = () => {
   const [isStep, setStep] = useState<number>(1);
 
   const handleStep = (stepIndex: number) => {
-    const progressValue = (stepIndex + 1) * 20; // Langkah dimulai dari 0, jadi kita tambahkan 1 agar perhitungan dimulai dari 20
+    const progressValue = (stepIndex + 1) * 20; 
     setProgress(progressValue);
     setStep(stepIndex + 1); 
   }
