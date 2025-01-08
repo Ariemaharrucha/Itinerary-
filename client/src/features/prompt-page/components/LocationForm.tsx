@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import {
   Command,
   CommandEmpty,
@@ -8,10 +9,12 @@ import {
 } from "@/components/ui/command";
 import { autoComplete } from "@/lib/google";
 import { useEffect, useState } from "react";
+import { WizardNavigation } from "./WizardNavigation";
 
 export const LocationForm = () => {
   const [predictions, setPredictions] = useState([]);
   const [input, setInput] = useState("");
+
   useEffect(() => {
     const fetchPredictios = async () => {
       const predictions = await autoComplete(input);
@@ -23,10 +26,10 @@ export const LocationForm = () => {
   return (
     <section className=" w-2/3 m-auto ">
       <div className="text-center">
-        <h1 className="mt-10 mb-10 text-4xl font-bold ">
+        <h1 className="mt-10 mb-8 text-4xl font-bold ">
           Pertama, ke mana kau ingin pergi?
         </h1>
-        <p className="text-slate-400 text-md pb-12">
+        <p className="text-slate-400 text-lg pb-12">
           Anda akan mendapatkan res ulang untuk rencana perjalanan
         </p>
         <Command
@@ -66,6 +69,7 @@ export const LocationForm = () => {
           </div>
         </div>
       </div>
+      <WizardNavigation/>
     </section>
   );
 };
