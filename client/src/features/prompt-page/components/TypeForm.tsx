@@ -1,6 +1,7 @@
 import { WizardNavigation } from "./WizardNavigation";
 import { Heart, Home, UserRound, Users } from "lucide-react";
-import { Checkbox } from "@/components/ui/checkbox";
+// import { Checkbox } from "@/components/ui/checkbox";
+import { ReactNode } from "react";
 
 const tripTypes = [
   {
@@ -38,7 +39,12 @@ export const TypeForm = () => {
       <div className="pb-5">
         <div className="grid grid-cols-12 gap-2">
           {tripTypes.map((trip) => (
-            <CardType key={trip.value} icon={trip.icon} label={trip.label} />
+            <CardType
+              key={trip.value}
+              icon={trip.icon}
+              label={trip.label}
+              value={trip.value}
+            />
           ))}
         </div>
       </div>
@@ -51,16 +57,22 @@ export const TypeForm = () => {
 interface CardTypeProps {
   icon: ReactNode;
   label: string;
+  value: string;
 }
 
-const CardType = ({ icon, label }: CardTypeProps) => {
+const CardType = ({ icon, label, value }: CardTypeProps) => {
   return (
-    <div className="col-span-3 border rounded-lg px-4 pt-4 pb-12 flex justify-between">
+    <label className="col-span-3 border rounded-lg px-4 pt-4 pb-12 flex justify-between items-center cursor-pointer has-[:checked]:bg-green-400/80 transition">
       <div className="space-y-2">
         {icon}
         <p className="font-semibold">{label}</p>
       </div>
-      <Checkbox className="border-none focus-visible:ring-2 bg-transparent checked:bg-current" />
-    </div>
+      <input
+        type="radio"
+        name="tripType"
+        value={value}
+        className="hidden"
+      />
+    </label>
   );
 };
