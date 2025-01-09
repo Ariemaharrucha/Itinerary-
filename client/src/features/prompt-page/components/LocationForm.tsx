@@ -25,7 +25,6 @@ export const LocationForm = () => {
     "Pekanbaru",
   ];
 
-  // Filter prediksi berdasarkan input
   const filteredLocations = locations.filter((location) =>
     location.toLowerCase().includes(input.toLowerCase())
   );
