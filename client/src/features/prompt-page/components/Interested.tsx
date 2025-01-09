@@ -1,4 +1,6 @@
+import useFormState from "@/store/useStore";
 import { WizardNavigation } from "./WizardNavigation";
+import { useState } from "react";
 
 const vacationInterests = [
   {
@@ -24,6 +26,17 @@ const vacationInterests = [
 ];
 
 export const Interested = () => {
+  const { setStepData } = useFormState();
+  const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
+
+  const handleToggleInterest = (value: string) => {
+    const updatedInterests = selectedInterests.includes(value)
+      ? selectedInterests.filter((item) => item !== value)
+      : [...selectedInterests, value];
+    setSelectedInterests(updatedInterests);
+    setStepData("preferences", { selectedInterests: updatedInterests });
+  };
+
   return (
     <section className=" w-2/3 m-auto ">
       <div className="text-center">
@@ -43,6 +56,7 @@ export const Interested = () => {
               type="checkbox"
               value={interest.value}
               className="appearance-none hidden checked:border-transparent w-5 h-5 rounded"
+              onChange={() => handleToggleInterest(interest.value)}
             />
             <span>{interest.label}</span>
           </label>

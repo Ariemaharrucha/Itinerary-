@@ -1,9 +1,14 @@
 import { Calendar } from "@/components/ui/calendar";
 import { WizardNavigation } from "./WizardNavigation";
-import React from "react";
+import React, { useEffect } from "react";
+import useFormState from "@/store/useStore";
 
 export const DurationForm = () => {
   const [date, setDate] = React.useState<Date | undefined>(new Date());
+  const { setStepData } = useFormState();
+  useEffect(() => {
+    setStepData("duration", { date }); 
+  }, [date, setStepData]);
   return (
     <section className=" w-2/3 m-auto ">
       <div className="text-center">
@@ -16,7 +21,6 @@ export const DurationForm = () => {
           mode="range"
           selected={date}
           onSelect={setDate}
-          className=""
           required
         />
       </div>

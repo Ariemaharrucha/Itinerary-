@@ -6,7 +6,7 @@ export const WizardNavigation = ({ showNext = true, showBack = true }) => {
 
   const handleNext = () => {
     if (isLastStep) {
-      // onSubmit();
+      onsubmit();
     } else {
       nextStep(); 
       console.log(isLastStep);

@@ -1,7 +1,8 @@
+import useFormState from "@/store/useStore";
 import { WizardNavigation } from "./WizardNavigation";
 import { Heart, Home, UserRound, Users } from "lucide-react";
 // import { Checkbox } from "@/components/ui/checkbox";
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 
 const tripTypes = [
   {
@@ -27,6 +28,14 @@ const tripTypes = [
 ];
 
 export const TypeForm = () => {
+  const { setStepData } = useFormState();
+  const [selectedType, setSelectedType] = useState("");
+
+  const handleSelectType = (type: string) => {
+    setSelectedType(type);
+    setStepData("type", { selectedType: type });    
+  };
+
   return (
     <section className=" w-2/3 m-auto ">
       <div className="text-center">
@@ -44,6 +53,8 @@ export const TypeForm = () => {
               icon={trip.icon}
               label={trip.label}
               value={trip.value}
+              isSelected={selectedType === trip.value}
+              onClick={() => handleSelectType(trip.value)}
             />
           ))}
         </div>
@@ -54,15 +65,20 @@ export const TypeForm = () => {
   );
 };
 
-interface CardTypeProps {
-  icon: ReactNode;
-  label: string;
-  value: string;
-}
+  interface CardTypeProps {
+    icon: ReactNode;
+    label: string;
+    value: string;
+    onClick: ()=>void;
+    isSelected: boolean;
+  }
 
-const CardType = ({ icon, label, value }: CardTypeProps) => {
+const CardType = ({ icon, label, value, isSelected, onClick }: CardTypeProps) => {
   return (
-    <label className="col-span-3 border rounded-lg px-4 pt-4 pb-12 flex justify-between items-center cursor-pointer has-[:checked]:bg-green-400/80 transition">
+    <label className={`col-span-3 border rounded-lg px-4 pt-4 pb-12 flex justify-between items-center cursor-pointer transition ${
+      isSelected ? "bg-green-400/80" : ""
+    }`}
+    onClick={onClick}>
       <div className="space-y-2">
         {icon}
         <p className="font-semibold">{label}</p>
