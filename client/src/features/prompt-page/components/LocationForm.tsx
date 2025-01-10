@@ -8,9 +8,16 @@ import {
 } from "@/components/ui/command";
 import { useState } from "react";
 import { WizardNavigation } from "./WizardNavigation";
+import useFormState from "@/store/useStore";
 
 export const LocationForm = () => {
   const [input, setInput] = useState("");
+  const { setStepData } = useFormState();
+
+  const handleSelect = (location: string ) => {
+    setInput(location);
+    setStepData("location", { location });
+  };
 
   const locations = [
     "Jakarta",
@@ -48,7 +55,7 @@ export const LocationForm = () => {
             {filteredLocations.length > 0 ? (
               <CommandGroup heading="Suggestions">
                 {filteredLocations.map((location, index) => (
-                  <CommandItem key={index} onSelect={() => setInput(location)}>
+                  <CommandItem key={index} onSelect={() => handleSelect(location)}>
                     {location}
                   </CommandItem>
                 ))}

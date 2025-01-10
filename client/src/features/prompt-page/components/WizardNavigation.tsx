@@ -1,18 +1,26 @@
 import { useWizard } from "react-use-wizard";
 import { Button } from "@/components/ui/button";
 
-export const WizardNavigation = ({ showNext = true, showBack = true }) => {
+interface WizardNavigationProps {
+  showNext?: boolean;
+  showBack?: boolean;
+  onSubmit?: () => void; // Membuat onSubmit menjadi opsional
+}
+
+export const WizardNavigation: React.FC<WizardNavigationProps> = ({ 
+  showNext = true, 
+  showBack = true, 
+  onSubmit 
+}) => {
   const { nextStep, previousStep, isFirstStep, isLastStep } = useWizard();
 
   const handleNext = () => {
     if (isLastStep) {
-      // onSubmit();
+      onSubmit();
     } else {
       nextStep(); 
-      console.log(isLastStep);
     }
   };
-
 
   return (
     <div className="flex justify-between items-center mt-8">
@@ -25,7 +33,7 @@ export const WizardNavigation = ({ showNext = true, showBack = true }) => {
           Back
         </Button>
       )}
-      {showNext  && (
+      {showNext && (
         <Button
           size={"lg"}
           className="ml-auto font-bold text-lg"

@@ -15,6 +15,7 @@ export const PromptPage = () => {
     setProgress(progressValue);
     setStep(stepIndex + 1); 
   }
+  
   return (
     <div>
       <div className="container mx-auto min-h-screen pb-2 ">
