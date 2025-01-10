@@ -4,7 +4,7 @@ import { StepData } from "@/utils/interface";
 
 type FormState = {
     stepData: StepData;
-    setStepData: (step: keyof StepData, data: any) => void;
+    setStepData: (step: keyof StepData, data: unknown) => void;
     resetForm: () => void;
   };
 

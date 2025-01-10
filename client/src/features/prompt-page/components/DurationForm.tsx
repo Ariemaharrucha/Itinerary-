@@ -7,7 +7,7 @@ export const DurationForm = () => {
   const [date, setDate] = React.useState<Date | undefined>(new Date());
   const { setStepData } = useFormState();
   useEffect(() => {
-    setStepData("duration", { date }); // Simpan data ke store
+    setStepData("duration", { date }); 
   }, [date, setStepData]);
   return (
     <section className=" w-2/3 m-auto ">

@@ -1,4 +1,5 @@
 import useFormState from "@/store/useStore";
+import useFormState from "@/store/useStore";
 import { WizardNavigation } from "./WizardNavigation";
 import { Heart, Home, UserRound, Users } from "lucide-react";
 import {
@@ -90,6 +91,8 @@ export const TypeForm = () => {
               icon={trip.icon}
               label={trip.label}
               value={trip.value}
+              isSelected={selectedType === trip.value}
+              onClick={() => handleSelectType(trip.value)}
               isSelected={selectedType === trip.value}
               onClick={() => handleSelectType(trip.value)}
             />
