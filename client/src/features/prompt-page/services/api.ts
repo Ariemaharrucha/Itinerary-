@@ -1,12 +1,20 @@
 import axios from "axios";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const generateItenray = async (values: any) => {
+interface IData {
+  location?: string | undefined;
+  duration?: {from: Date, to: Date} | undefined;
+  type?: string | undefined;
+  budget?: string | undefined;
+  preferences?: string[] | undefined
+}
+
+export const generateItenray = async (values: IData) => {
+  if(!values) return;
   try {
-    const updatedPreferences = values.preferences.join(", ");
+    const updatedPreferences = values.preferences!.join(", ");
 
     const durationInDays = Math.ceil(
-      (new Date(values.duration.to).getTime() - new Date(values.duration.from).getTime()) / (1000 * 3600 * 24)
+      (new Date(values.duration!.to).getTime() - new Date(values.duration!.from).getTime()) / (1000 * 3600 * 24)
     );
 
     const payload = {
