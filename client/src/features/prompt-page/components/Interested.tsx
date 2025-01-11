@@ -1,8 +1,7 @@
 import useFormState from "@/store/useStore";
-import useFormState from "@/store/useStore";
 import { WizardNavigation } from "./WizardNavigation";
 import { useState } from "react";
-import { useState } from "react";
+import { generateItenray } from "../services/api";
 
 const vacationInterests = [
   {
@@ -28,19 +27,22 @@ const vacationInterests = [
 ];
 
 export const Interested = () => {
-  const { stepData, setStepData } = useFormState();
-  const [selectedInterests, setSelectedInterests] = useState<string[]>(stepData?.preferences?.preferences || []);
+  const { stepData, setStepData, resetForm } = useFormState();
+  const [selectedInterests, setSelectedInterests] = useState<string[]>( Array.isArray(stepData?.preferences) ? stepData.preferences : []);
 
   const handleTogglePreferences = (value: string) => {
     const updatedInterests = selectedInterests.includes(value)
       ? selectedInterests.filter((item) => item !== value)
       : [...selectedInterests, value];
     setSelectedInterests(updatedInterests);
-    setStepData("preferences", { preferences: updatedInterests });
+    setStepData("preferences", updatedInterests);
   };
 
-  const hanlesubmit = () => {
-    console.log(stepData);
+   const hanlesubmit = async () => {
+      const response = await generateItenray(stepData)
+      console.log(response);
+      resetForm()
+      setSelectedInterests([])
   }
 
   return (

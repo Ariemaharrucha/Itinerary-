@@ -16,7 +16,7 @@ export const LocationForm = () => {
 
   const handleSelect = (location: string ) => {
     setInput(location);
-    setStepData("location", { location });
+    setStepData("location", location );
   };
 
   const locations = [

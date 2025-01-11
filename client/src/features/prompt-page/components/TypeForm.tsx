@@ -1,5 +1,4 @@
 import useFormState from "@/store/useStore";
-import useFormState from "@/store/useStore";
 import { WizardNavigation } from "./WizardNavigation";
 import { Heart, Home, UserRound, Users } from "lucide-react";
 import {
@@ -44,12 +43,12 @@ export const TypeForm = () => {
 
   const updateCombinedBudget = (currency: string, amount: string) => {
     const budget = `${currency} ${amount}`;
-    setStepData("budget", { budget });
+    setStepData("budget", budget );
   };
 
   const handleSelectType = (type: string) => {
     setSelectedType(type);
-    setStepData("type", { type: type });
+    setStepData("type", type );
     console.log(type);
   };
 
@@ -91,8 +90,6 @@ export const TypeForm = () => {
               icon={trip.icon}
               label={trip.label}
               value={trip.value}
-              isSelected={selectedType === trip.value}
-              onClick={() => handleSelectType(trip.value)}
               isSelected={selectedType === trip.value}
               onClick={() => handleSelectType(trip.value)}
             />
