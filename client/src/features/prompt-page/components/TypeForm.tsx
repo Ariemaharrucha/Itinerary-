@@ -1,6 +1,5 @@
 import useFormState from "@/store/useStore";
 import { WizardNavigation } from "./WizardNavigation";
-import { Heart, Home, UserRound, Users } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -11,29 +10,7 @@ import {
 import {useState } from "react";
 import { CardType } from "./CardType";
 import { Input } from "@/components/ui/input";
-
-const tripTypes = [
-  {
-    icon: <UserRound />,
-    value: "solo-trip",
-    label: "Solo Trip",
-  },
-  {
-    icon: <Heart />,
-    value: "partner-trip",
-    label: "Partner Trip",
-  },
-  {
-    icon: <Home />,
-    value: "family-trip",
-    label: "Family Trip",
-  },
-  {
-    icon: <Users />,
-    value: "friends-trip",
-    label: "Friends Trip",
-  },
-];
+import { tripTypes } from "@/constant/tripTypes";
 
 export const TypeForm = () => {
   const { setStepData } = useFormState();

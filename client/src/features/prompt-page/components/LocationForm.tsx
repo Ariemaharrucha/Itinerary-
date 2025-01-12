@@ -9,79 +9,92 @@ import {
 import { useState } from "react";
 import { WizardNavigation } from "./WizardNavigation";
 import useFormState from "@/store/useStore";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { Button } from "@/components/ui/button";
+import { Check, ChevronsUpDown } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { locations, populerLocation } from "@/constant/locations";
 
 export const LocationForm = () => {
-  const [input, setInput] = useState("");
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState("");
   const { setStepData } = useFormState();
-
-  const handleSelect = (location: string ) => {
-    setInput(location);
-    setStepData("location", location );
-  };
-
-  const locations = [
-    "Jakarta",
-    "Yogyakarta",
-    "Surabaya",
-    "Bali",
-    "Bandung",
-    "Medan",
-    "Makassar",
-    "Semarang",
-    "Palembang",
-    "Pekanbaru",
-  ];
-
-  const filteredLocations = locations.filter((location) =>
-    location.toLowerCase().includes(input.toLowerCase())
-  );
 
   return (
     <section className="w-2/3 m-auto">
       <div className="text-center">
-        <h1 className="mt-10 mb-8 text-4xl font-bold">
+        <h1 className="mt-8 mb-8 text-4xl font-bold">
           Pertama, ke mana kau ingin pergi?
         </h1>
         <p className="text-slate-400 text-lg pb-12">
-          Anda akan mendapatkan res ulang untuk rencana perjalanan
+          Anda akan mendapatkan respon ulang untuk rencana perjalanan
         </p>
-        <Command
-          className="rounded-lg border shadow-md md:min-w-[450px]"
-          value={input}
-          onValueChange={setInput}
-        >
-          <CommandInput placeholder="Type a location..." />
-          <CommandList>
-            {filteredLocations.length > 0 ? (
-              <CommandGroup heading="Suggestions">
-                {filteredLocations.map((location, index) => (
-                  <CommandItem key={index} onSelect={() => handleSelect(location)}>
-                    {location}
-                  </CommandItem>
-                ))}
-              </CommandGroup>
-            ) : (
-              <CommandEmpty>No results found.</CommandEmpty>
-            )}
-          </CommandList>
-        </Command>
+        <Popover open={open} onOpenChange={setOpen}>
+          <PopoverTrigger asChild>
+            <Button
+              variant="outline"
+              role="combobox"
+              aria-expanded={open}
+              className="w-[450px] justify-between"
+            >
+              {value
+                ? locations.find((location) => location.value === value)?.label
+                : "Cari Lokasi"}
+              <ChevronsUpDown className="opacity-50" />
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="w-[450px] p-0">
+            <Command>
+              <CommandInput placeholder="Lokasi" />
+              <CommandList>
+                <CommandEmpty>No framework found.</CommandEmpty>
+                <CommandGroup>
+                  {locations.map((location) => (
+                    <CommandItem
+                      key={location.value}
+                      value={location.value}
+                      onSelect={(currentValue) => {
+                        setValue(currentValue === value ? "" : currentValue);
+                        setOpen(false);
+                        setStepData("location", currentValue);
+                      }}
+                    >
+                      {location.label}
+                      <Check
+                        className={cn(
+                          "ml-auto",
+                          value === location.value ? "opacity-100" : "opacity-0"
+                        )}
+                      />
+                    </CommandItem>
+                  ))}
+                </CommandGroup>
+              </CommandList>
+            </Command>
+          </PopoverContent>
+        </Popover>
       </div>
-
-      <div className="mt-20">
+      <div className="mt-16">
         <h1 className="text-center text-3xl">
           Atau memulai dengan tujuan populer
         </h1>
-        <div className="mt-8">
-          <div>
-            <div className="overflow-hidden size-32 rounded-md">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/1/10/Yogyakarta_Indonesia_Tugu-Yogyakarta-02.jpg"
-                alt=""
-                className="w-full h-full object-cover"
-              />
+        <div className="mt-8 flex justify-around">
+          {populerLocation.map((location) => (
+            <div key={location.value} className="text-center cursor-pointer" onClick={()=>{alert('belum bisa menggunakan lokasi populer')}}>
+              <div className="overflow-hidden rounded-md size-32">
+                <img
+                  src={location.img}
+                  alt={location.label}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <h3 className="mt-2 font-bold">{location.label}</h3>
             </div>
-            <h3 className="mt-2 font-bold">Yogyakarta</h3>
-          </div>
+          ))}
         </div>
       </div>
       <WizardNavigation />
