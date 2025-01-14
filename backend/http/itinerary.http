@@ -2,7 +2,7 @@ POST http://localhost:8000/itinerary
 Content-Type: application/json
 
 {
-    "location": "magetan, jawa timur",
+    "location": "surabaya",
     "duration": 2,
     "type": "sendirian",
     "budget": "Rp 5.000.000",
