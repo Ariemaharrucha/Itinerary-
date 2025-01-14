@@ -5,7 +5,7 @@ import { generateItenray } from "../services/api";
 import { vacationInterests } from "@/constant/interests";
 
 export const Interested = () => {
-  const { stepData, setStepData, resetForm } = useFormState();
+  const { stepData, setStepData, resetForm , setTravelPlan} = useFormState();
   const [selectedInterests, setSelectedInterests] = useState<string[]>(
     Array.isArray(stepData?.preferences) ? stepData.preferences : []
   );
@@ -24,6 +24,7 @@ export const Interested = () => {
       setLoading(true)
       const response = await generateItenray(stepData);
       console.log(response);
+      setTravelPlan(response)
     } catch (error) {
       console.log(error);
     } finally {
