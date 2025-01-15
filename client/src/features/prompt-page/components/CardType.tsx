@@ -18,7 +18,7 @@ export const CardType = ({
   return (
     <label
       className={`col-span-3 border rounded-lg px-4 pt-4 pb-12 flex justify-between items-center cursor-pointer transition ${
-        isSelected ? "bg-green-400/80" : ""
+        isSelected ? "bg-blue-600 text-white" : ""
       }`}
       onClick={onClick}
     >

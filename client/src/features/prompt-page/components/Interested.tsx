@@ -11,6 +11,7 @@ export const Interested = () => {
     Array.isArray(stepData?.preferences) ? stepData.preferences : []
   );
   const [isLoading, setLoading] = useState<boolean>(false);
+  const [isError, setError] = useState<string>('');
   const navigate = useNavigate()
 
   const handleTogglePreferences = (value: string) => {
@@ -21,17 +22,21 @@ export const Interested = () => {
     setStepData("preferences", updatedInterests);
   };
 
-  const hanlesubmit = async () => {
+  const handleSubmit = async () => {
     try {
-      setLoading(true)
+      setLoading(true);
+      setError(''); // Reset error state
       const response = await generateItenray(stepData);
-      console.log(response);
-      setTravelPlan(response)
-      navigate('/itinerary_preview')
+      setTravelPlan(response);
+      if (response) {
+        navigate('/itinerary_preview');
+      } else {
+        setError('Failed to generate itinerary. Please try again.')
+      }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     } finally {
-      setLoading(false)
+      setLoading(false);
       resetForm();
       setSelectedInterests([]);
     }
@@ -50,7 +55,7 @@ export const Interested = () => {
         {vacationInterests.map((interest) => (
           <label
             key={interest.value}
-            className="inline-flex items-center gap-2 rounded-full border px-6 py-4 text-base font-semibold hover:bg-slate-200 has-[:checked]:bg-green-400 cursor-pointer"
+            className="inline-flex items-center gap-2 rounded-full border px-6 py-4 text-base font-semibold hover:bg-slate-200 has-[:checked]:bg-blue-600 cursor-pointer has-[:checked]:text-white"
           >
             <input
               type="checkbox"
@@ -63,7 +68,9 @@ export const Interested = () => {
           </label>
         ))}
       </div>
-      {isLoading ? (<p className="text-xl text-slate-400 text-center mt-3 font-semibold animate-pulse">Please wait...</p>) : (<WizardNavigation onSubmit={hanlesubmit} />)}
+      {isError && <p className="text-red-500 text-center mt-4">{isError}</p>}
+      {isLoading ? (<p className="text-xl text-slate-400 text-center mt-3 font-semibold animate-pulse">Please wait...</p>) :
+      (<WizardNavigation onSubmit={handleSubmit} />)}
     </section>
   );
 };
