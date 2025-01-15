@@ -7,12 +7,19 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { ItinerarySession } from "@/utils/result";
 import { ItineraryDay } from "@/utils/result";
 
 interface SectionDescriptionProps {
   title: string;
   items?: string[];
+  clasName?: string;
 }
 
 interface SectionItineraryProps {
@@ -22,45 +29,63 @@ interface SectionItineraryProps {
 export const Preview = () => {
   const { travelPlan } = useFormState();
   return (
-    <div>
+    <div className="">
       <div className="container mx-auto min-h-screen pb-2 ">
         <header className="text-center p-4">
-          <p>Result</p>
+          <p className="">Result</p>
         </header>
-        <div className="max-w-4xl mx-auto">
+        <div>
+          {/* informas umum dan catatan */}
           <div className="flex gap-2">
             <SectionDescription
               title="Informasi Umum"
               items={travelPlan?.InformasiUmum}
+              clasName="w-2/4"
             />
-            <SectionDescription title="Catatan" items={travelPlan?.Catatan} />
+            <SectionDescription
+              title="Catatan"
+              items={travelPlan?.Catatan}
+              clasName="w-full"
+            />
           </div>
-          <SectionItinerary travelPlan={travelPlan?.Itinerary} />
-          <SectionDescription
-            title="Estimasi Total Biaya"
-            items={travelPlan?.EstimasiTotalBiaya}
-          />
-          <SectionDescription
-            title="Sisa Anggaran"
-            items={travelPlan?.SisaAnggaran}
-          />
-          <SectionDescription
-            title="Tips Tambahan"
-            items={travelPlan?.TipsTambahan}
-          />
+
+          {/* Itinerary */}
+          <AccordionItinerary travelPlan={travelPlan?.Itinerary} />
+
+          {/* Tips Tambahan & anggaran */}
+          <div className="mt-3 grid grid-rows-3 grid-flow-col gap-x-4">
+            <SectionDescription
+              title="Tips Tambahan"
+              items={travelPlan?.TipsTambahan}
+              clasName="row-span-3"
+            />
+            <SectionDescription
+              title="Estimasi Total Biaya"
+              items={travelPlan?.EstimasiTotalBiaya}
+              clasName="row-span-2 col-span-2"
+            />
+            <SectionDescription
+              title="Sisa Anggaran"
+              items={travelPlan?.SisaAnggaran}
+              clasName="col-span-2"
+            />
+          </div>
         </div>
       </div>
     </div>
   );
 };
 
-const SectionDescription: React.FC<SectionDescriptionProps> = ({ title, items }) => (
-  <Card className="mb-6">
+const SectionDescription: React.FC<SectionDescriptionProps> = ({
+  title,
+  items,
+  clasName,
+}) => (
+  <Card className={`mb-6 ${clasName}`}>
     <CardHeader>
       <CardTitle className="text-xl font-semibold">{title}</CardTitle>
     </CardHeader>
     <CardContent>
-      <div></div>
       <ul className="list-disc pl-5">
         {items?.map((item, index: number) => (
           <li key={index} className="mb-2">
@@ -72,33 +97,49 @@ const SectionDescription: React.FC<SectionDescriptionProps> = ({ title, items })
   </Card>
 );
 
-const SectionItinerary:React.FC<SectionItineraryProps> = ({ travelPlan }) => {
+const AccordionItinerary: React.FC<SectionItineraryProps> = ({
+  travelPlan,
+}) => {
   return (
-    <Card>
-      <CardHeader className="text-lg font-bold">Itinerary</CardHeader>
-      <CardContent>
-        {travelPlan?.map((day: ItineraryDay, index: number) => (
-          <div key={index} className="space-y-4 mb-6">
-            <h3 className="text-md font-semibold">Hari {day.Hari}</h3>
+    <Accordion type="multiple" className="space-y-3">
+      {travelPlan?.map((day: ItineraryDay, index: number) => (
+        <AccordionItem value={`item-${index}`} className="border-2 rounded-md py-0.5 px-2 ">
+          <AccordionTrigger>
+            Hari {day.Hari}
+          </AccordionTrigger>
+          <ul className="">
             {Object.entries(day).map(([time, details], index) => {
               if (time === "Hari") return null;
-
-              const session = details as ItinerarySession; 
+              const session = details as ItinerarySession;
               return (
-                <li key={index}>
-                  <strong className="block text-gray-800">{time}</strong>
-                  <p><strong>Waktu:</strong> {session.Waktu}</p>
-                  <p><strong>Kegiatan:</strong> {session.Kegiatan}</p>
-                  <p><strong>Deskripsi:</strong> {session.Deskripsi}</p>
-                  <p><strong>Harga Tiket:</strong> {session.HargaTiket}</p>
-                  <p><strong>Jam Operasional:</strong> {session.JamOperasional}</p>
-                  <p><strong>Transportasi:</strong> {session.Transportasi}</p>
-                </li>
+                <AccordionContent className="">
+                  <li key={index}>
+                    <strong className="block text-gray-800">{time}</strong>
+                    <p>
+                      <strong>Waktu:</strong> {session.Waktu}
+                    </p>
+                    <p>
+                      <strong>Kegiatan:</strong> {session.Kegiatan}
+                    </p>
+                    <p>
+                      <strong>Deskripsi:</strong> {session.Deskripsi}
+                    </p>
+                    <p>
+                      <strong>Harga Tiket:</strong> {session.HargaTiket}
+                    </p>
+                    <p>
+                      <strong>Jam Operasional:</strong> {session.JamOperasional}
+                    </p>
+                    <p>
+                      <strong>Transportasi:</strong> {session.Transportasi}
+                    </p>
+                  </li>
+                </AccordionContent>
               );
             })}
-          </div>
-        ))}
-      </CardContent>
-    </Card>
+          </ul>
+        </AccordionItem>
+      ))}
+    </Accordion>
   );
 };

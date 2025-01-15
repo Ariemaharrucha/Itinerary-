@@ -3,6 +3,7 @@ import { WizardNavigation } from "./WizardNavigation";
 import { useState } from "react";
 import { generateItenray } from "../services/api";
 import { vacationInterests } from "@/constant/interests";
+import { useNavigate } from "react-router-dom";
 
 export const Interested = () => {
   const { stepData, setStepData, resetForm , setTravelPlan} = useFormState();
@@ -10,6 +11,7 @@ export const Interested = () => {
     Array.isArray(stepData?.preferences) ? stepData.preferences : []
   );
   const [isLoading, setLoading] = useState<boolean>(false);
+  const navigate = useNavigate()
 
   const handleTogglePreferences = (value: string) => {
     const updatedInterests = selectedInterests.includes(value)
@@ -25,6 +27,7 @@ export const Interested = () => {
       const response = await generateItenray(stepData);
       console.log(response);
       setTravelPlan(response)
+      navigate('/itinerary_preview')
     } catch (error) {
       console.log(error);
     } finally {
