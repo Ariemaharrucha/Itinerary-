@@ -5,6 +5,7 @@ import { useState } from "react";
 import { DurationForm } from "./DurationForm";
 import { TypeForm } from "./TypeForm";
 import { Interested } from "./Interested";
+import { Toaster } from "@/components/ui/toaster"
 
 export const PromptPage = () => {
   const [isProgress, setProgress] = useState(20);
@@ -18,6 +19,7 @@ export const PromptPage = () => {
   
   return (
     <div>
+      <Toaster/>
       <div className="container mx-auto min-h-screen pb-2 ">
         <header className="text-center p-4">
           <p>{isStep} of 4</p>

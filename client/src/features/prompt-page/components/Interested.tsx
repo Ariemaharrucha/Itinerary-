@@ -13,6 +13,7 @@ export const Interested = () => {
   const [isLoading, setLoading] = useState<boolean>(false);
   const [isError, setError] = useState<string>('');
   const navigate = useNavigate()
+  const isValid = !!selectedInterests && !!stepData.budget && !!stepData.type && !!stepData.duration && !!stepData.location
 
   const handleTogglePreferences = (value: string) => {
     const updatedInterests = selectedInterests.includes(value)
@@ -70,7 +71,7 @@ export const Interested = () => {
       </div>
       {isError && <p className="text-red-500 text-center mt-4">{isError}</p>}
       {isLoading ? (<p className="text-xl text-slate-400 text-center mt-3 font-semibold animate-pulse">Please wait...</p>) :
-      (<WizardNavigation onSubmit={handleSubmit} />)}
+      (<WizardNavigation onSubmit={handleSubmit} isValid={isValid} />)}
     </section>
   );
 };

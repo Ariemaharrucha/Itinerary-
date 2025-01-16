@@ -7,16 +7,25 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import {useState } from "react";
+import {useEffect, useState } from "react";
 import { CardType } from "./CardType";
 import { Input } from "@/components/ui/input";
 import { tripTypes } from "@/constant/tripTypes";
 
 export const TypeForm = () => {
-  const { setStepData } = useFormState();
-  const [selectedType, setSelectedType] = useState(""); 
+  const { setStepData, stepData } = useFormState();
+  const [selectedType, setSelectedType] = useState<string | undefined >(stepData.type ?? " "); 
   const [currency, setCurrency] = useState("");
   const [amount, setAmount] = useState("");
+  const valid = !!currency && !!amount;
+  
+  useEffect(()=>{
+    if(stepData.budget) {
+      const [initialCurrency, initialAmount] = stepData.budget.split(" ");
+      setCurrency(initialCurrency);
+      setAmount(initialAmount);
+    }
+  },[stepData.budget])
 
   const updateCombinedBudget = (currency: string, amount: string) => {
     const budget = `${currency} ${amount}`;
@@ -46,7 +55,7 @@ export const TypeForm = () => {
           Apa jenis perjalanan yang Anda dan berapa modal anda?
         </h1>
         <div className="mb-6 flex gap-4">
-          <Select onValueChange={handleCurrency}>
+          <Select value={currency} onValueChange={handleCurrency}>
             <SelectTrigger className="w-[180px]">
               <SelectValue placeholder="Mata uang" />
             </SelectTrigger>
@@ -74,7 +83,7 @@ export const TypeForm = () => {
         </div>
       </div>
 
-      <WizardNavigation />
+      <WizardNavigation isValid={valid}/>
     </section>
   );
 };

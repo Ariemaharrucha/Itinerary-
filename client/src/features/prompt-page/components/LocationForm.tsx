@@ -6,23 +6,25 @@ import {
   CommandItem,
   CommandList,
 } from "@/components/ui/command";
-import { useState } from "react";
-import { WizardNavigation } from "./WizardNavigation";
-import useFormState from "@/store/useStore";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
+} from "@/components/ui/popover"; 
 import { Button } from "@/components/ui/button";
 import { Check, ChevronsUpDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { locations, populerLocation } from "@/constant/locations";
+import { useState } from "react";
+import { WizardNavigation } from "./WizardNavigation";
+import useFormState from "@/store/useStore";
 
 export const LocationForm = () => {
+  const { setStepData, stepData } = useFormState();
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState("");
-  const { setStepData } = useFormState();
+  const [value, setValue] = useState<string | undefined>(stepData?.location ?? '');
+
+  const isValid = !!value;
 
   return (
     <section className="w-2/3 m-auto">
@@ -97,7 +99,7 @@ export const LocationForm = () => {
           ))}
         </div>
       </div>
-      <WizardNavigation />
+      <WizardNavigation isValid={isValid}/>
     </section>
   );
 };

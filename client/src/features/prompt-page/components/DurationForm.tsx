@@ -4,8 +4,10 @@ import React, { useEffect } from "react";
 import useFormState from "@/store/useStore";
 
 export const DurationForm = () => {
+  const { setStepData, stepData } = useFormState();
   const [date, setDate] = React.useState<Date | undefined>(new Date());
-  const { setStepData } = useFormState();
+
+  const isValid = !!date;
   useEffect(() => {
     setStepData("duration", date); 
   }, [date, setStepData]);
@@ -25,7 +27,7 @@ export const DurationForm = () => {
           disabled={{ before: new Date() }}
         />
       </div>
-      <WizardNavigation />
+      <WizardNavigation isValid={isValid}/>
     </section>
   );
 };
