@@ -1,5 +1,12 @@
-import genAi from "../utils/gemini";
-import { ITravel } from "../utils/types";
+import genAi from "@/utils/gemini";
+
+interface ITravel {
+  location?: string;
+  duration?: number;
+  type?: string;
+  budget?: string;
+  preferences?: string;
+}
 
 const model = genAi.getGenerativeModel({
   model: "gemini-2.0-flash-exp",
@@ -15,25 +22,29 @@ const generationConfig = {
   responseMimeType: "text/plain",
 };
 
-export async function getPlaning({
+export async function getItinerary({
   location,
   duration,
   type,
   budget,
   preferences,
 }: ITravel) {
-  const chatSession = model.startChat({
-    generationConfig,
-    history: [],
-  });
+  try {
+    const chatSession = model.startChat({
+      generationConfig,
+      history: [],
+    });
 
-  const userInput = `Saya ingin merencanakan perjalanan liburan. Berikut adalah informasi yang perlu Anda ketahui:\n- destinasi tujuan: ${location}\n- Tipe Liburan: ${type}\n- Durasi Perjalanan: ${duration} hari\n- Anggaran: ${budget}\n- Preferensi: ${preferences}"`;
-  const result = await chatSession.sendMessage(userInput);
-  const cleanedText = result.response
-    .text()
-    .replace(/```json/g, "")
-    .replace(/```/g, "");
+    const userInput = `Saya ingin merencanakan perjalanan liburan. Berikut adalah informasi yang perlu Anda ketahui:\n- destinasi tujuan: ${location}\n- Tipe Liburan: ${type}\n- Durasi Perjalanan: ${duration} hari\n- Anggaran: ${budget}\n- Preferensi: ${preferences}"`;
+    const result = await chatSession.sendMessage(userInput);
+    const cleanedText = result.response
+      .text()
+      .replace(/```json/g, "")
+      .replace(/```/g, "");
 
-  const parsedResult = JSON.parse(cleanedText);
-  return parsedResult;
+    const parsedResult = JSON.parse(cleanedText);
+    return parsedResult;
+  } catch (error) {
+    console.log(error);
+  }
 }
