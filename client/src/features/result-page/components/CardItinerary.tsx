@@ -27,6 +27,7 @@ export const CardItinerary: React.FC<SectionItineraryProps> = ({
     <Accordion type="multiple" className="space-y-3 ">
       {travelPlan?.map((day: ItineraryDay, index: number) => (
         <AccordionItem
+          key={`accordion-item-${index}`}
           value={`item-${index}`}
           className="border-2 border-[#BCCCDC] bg-[#eafaf4] text-[#333333] rounded-xl px-2 shadow-lg "
         >
@@ -37,7 +38,7 @@ export const CardItinerary: React.FC<SectionItineraryProps> = ({
               const session = details as ItinerarySession;
               return (
                 <AccordionContent
-                  key={index}
+                  key={`session-${day.Hari}-${index}`}
                   className="text-pretty font-sans w-full h-full py-2 px-3 rounded-lg space-y-1.5  text-[#000201]  text-base"
                 >
                   <p className="font-bold text-lg flex gap-2 items-center">

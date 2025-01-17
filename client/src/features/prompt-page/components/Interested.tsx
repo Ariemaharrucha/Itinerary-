@@ -1,7 +1,7 @@
 import useFormState from "@/store/useStore";
 import { WizardNavigation } from "./WizardNavigation";
 import { useState } from "react";
-import { generateItenray } from "../services/api";
+import { generateItenray } from "../services/get.itinerary";
 import { vacationInterests } from "@/constant/interests";
 import { useNavigate } from "react-router-dom";
 
@@ -31,6 +31,8 @@ export const Interested = () => {
       setTravelPlan(response);
       if (response) {
         navigate('/itinerary_preview');
+        resetForm();
+        setSelectedInterests([]);
       } else {
         setError('Failed to generate itinerary. Please try again.')
       }
@@ -38,8 +40,6 @@ export const Interested = () => {
       console.error(error);
     } finally {
       setLoading(false);
-      resetForm();
-      setSelectedInterests([]);
     }
   };
 

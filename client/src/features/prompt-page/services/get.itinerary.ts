@@ -1,4 +1,6 @@
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import axios from "axios";
+import { getItinerary } from "../api/api-itinerary";
 
 interface IData {
   location?: string | undefined;
@@ -24,8 +26,8 @@ export const generateItenray = async (values: IData) => {
       budget: values.budget,
       preferences: updatedPreferences,
     };
-
-    const {data: responseData } = await axios.post("http://localhost:8000/itinerary", payload)
+    
+    const responseData  = await getItinerary(payload)
     return responseData
   } catch (error) {
     console.log(error);
