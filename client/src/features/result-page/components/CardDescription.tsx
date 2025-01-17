@@ -22,7 +22,7 @@ export const CardDescription: React.FC<CardDescriptionProps> = ({
   icon
 }) => {
   return (
-    <Card className={`mb-6 shadow-lg ${clasName} bg-blue-600 text-white border-[#BCCCDC]`}>
+    <Card className={`mb-6 shadow-lg ${clasName} bg-[#eafaf4] text-[#333333] border-[#BCCCDC]`}>
       <CardHeader>
         <CardTitle className="text-xl font-semibold flex items-center gap-2">{title} {icon}</CardTitle>
       </CardHeader>

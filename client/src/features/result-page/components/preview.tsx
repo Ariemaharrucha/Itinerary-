@@ -9,7 +9,7 @@ export const Preview = () => {
     <div className=" font-roboto">
       <div className="container mx-auto min-h-screen pb-2 ">
         <header className="text-center p-4">
-          <p className="">Hasil</p>
+          <p className="text-lg">Hasil</p>
         </header>
         <div>
           {/* informas umum dan catatan */}
