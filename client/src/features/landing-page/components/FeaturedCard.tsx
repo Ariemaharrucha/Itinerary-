@@ -11,7 +11,7 @@ export const FeatureCard = ({ icon, text }: FeatureCardProps) => {
       <div className="size-12 border border-slate-500 rounded-full flex justify-center items-center">
         {icon}
       </div>
-      <p className="text-center text-lg">{text}</p>
+      <p className="text-center text-base">{text}</p>
     </div>
   );
 };

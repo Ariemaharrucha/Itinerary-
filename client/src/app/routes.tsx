@@ -9,8 +9,8 @@ export const AppRouter = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<LandingPage/>} />
-        <Route path="/itinerary_prompt" element={<PromptPage/>} />
-        <Route path="/itinerary_preview" element={<Preview/>} />
+        <Route path="/itinerary-prompt" element={<PromptPage/>} />
+        <Route path="/itinerary-preview" element={<Preview/>} />
       </Routes>
     </BrowserRouter>
   )
