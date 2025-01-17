@@ -1,7 +1,8 @@
 import useFormState from "@/store/useStore";
-import { CardDescription } from "./CardDescription";
-import { CardItinerary } from "./CardItinerary";
+
 import { LibraryBig, NotebookPen, Notebook, CircleDollarSign } from 'lucide-react';
+import { CardDescription } from "./components/CardDescription";
+import { CardItinerary } from "./components/CardItinerary";
 
 export const Preview = () => {
   const { travelPlan } = useFormState();

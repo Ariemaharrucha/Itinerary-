@@ -1,10 +1,10 @@
 import { Progress } from "@/components/ui/progress";
-import { LocationForm } from "./LocationForm";
+import { LocationForm } from "./components/LocationForm";
 import { Wizard } from 'react-use-wizard';
 import { useState } from "react";
-import { DurationForm } from "./DurationForm";
-import { TypeForm } from "./TypeForm";
-import { Interested } from "./Interested";
+import { DurationForm } from "./components/DurationForm";
+import { TypeForm } from "./components/TypeForm";
+import { Interested } from "./components/Interested";
 import { Toaster } from "@/components/ui/toaster"
 
 export const PromptPage = () => {
