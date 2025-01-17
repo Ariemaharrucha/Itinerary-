@@ -30,7 +30,7 @@ export const Interested = () => {
       const response = await generateItenray(stepData);
       setTravelPlan(response);
       if (response) {
-        navigate('/itinerary_preview');
+        navigate('/itinerary-preview');
         resetForm();
         setSelectedInterests([]);
       } else {
