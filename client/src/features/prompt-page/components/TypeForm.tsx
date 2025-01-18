@@ -1,4 +1,3 @@
-import useFormState from "@/store/useStore";
 import { WizardNavigation } from "./WizardNavigation";
 import {
   Select,
@@ -7,46 +6,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import {useEffect, useState } from "react";
 import { CardType } from "./CardType";
 import { Input } from "@/components/ui/input";
 import { tripTypes } from "@/constant/tripTypes";
+import { useTypeForm } from "../hooks/useTypeForm";
 
 export const TypeForm = () => {
-  const { setStepData, stepData } = useFormState();
-  const [selectedType, setSelectedType] = useState<string | undefined >(stepData.type ?? " "); 
-  const [currency, setCurrency] = useState("");
-  const [amount, setAmount] = useState("");
-  const valid = !!currency && !!amount;
-  
-  useEffect(()=>{
-    if(stepData.budget) {
-      const [initialCurrency, initialAmount] = stepData.budget.split(" ");
-      setCurrency(initialCurrency);
-      setAmount(initialAmount);
-    }
-  },[stepData.budget])
-
-  const updateCombinedBudget = (currency: string, amount: string) => {
-    const budget = `${currency} ${amount}`;
-    setStepData("budget", budget );
-  };
-
-  const handleSelectType = (type: string) => {
-    setSelectedType(type);
-    setStepData("type", type );
-    console.log(type);
-  };
-
-  const handleCurrency = (value: string) => {
-    setCurrency(value);
-    updateCombinedBudget(value, amount);
-  }
-
-  const handleBudgetChange = (value: string) => {
-    setAmount(value);
-    updateCombinedBudget(currency, value);
-  }
+  const {selectedType, valid, currency, amount, handleSelectType, handleCurrency, handleBudgetChange } = useTypeForm()
 
   return (
     <section className=" w-2/3 m-auto ">
