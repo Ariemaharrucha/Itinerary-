@@ -1,50 +1,77 @@
-# React + TypeScript + Vite
+# Itinerary-AI
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Itinerary-AI is a smart application designed to help users plan their trips effortlessly. Leveraging artificial intelligence, this tool creates personalized travel itineraries based on user preferences, destinations,  available time and budget.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Personalized Recommendations**: Tailored itineraries based on user preferences such as interests, travel duration, and budget.
+- **AI-Powered Planning**: Uses AI to suggest attractions and activities.
+- **Multi-Destination Support**: Multi-Destination Support: Plan trips covering multiple cities Indonesia.
 
-## Expanding the ESLint configuration
+## Installation
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Ariemaharrucha/Itinerary-ai.git
+   ```
+   
+2. Navigate to the project directory:
+   ```bash
+   cd Itinerary-ai
+   ```
 
-- Configure the top-level `parserOptions` property like this:
+3. Install dependencies:
+   ```bash
+   pnpm install
+   ```
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+4. Set up environment variables by creating a `.env` file in the root directory:
+   ```
+   VITE_GEMINI_API_KEY=your_api_key_gemini
+   ```
+    Get GEMINI API from web [aistudio.google.com](https://aistudio.google.com/app/apikey)
+5. Start the development server:
+   ```bash
+   pnpm dev
+   ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Usage
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+1. Open the application in your browser at local.
+2. Sign up or log in to your account.
+3. Enter your travel preferences, including destination, dates, and interests.
+4. Review the generated itinerary.
+5. export your itinerary in pdf.
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+## Technologies Used
+
+- **Frontend**: React, TypeScript, Tailwind CSS, Shadcn-UI
+- **API Integration**: Gemini-AI
+
+## Contributing
+
+We welcome contributions! Follow these steps to contribute:
+
+1. Fork the repository.
+2. Create a new branch:
+   ```bash
+   git checkout -b feature-name
+   ```
+3. Make your changes and commit them:
+   ```bash
+   git commit -m "Description of changes"
+   ```
+   
+4. Push your branch:
+   ```bash
+   git push origin feature-name
+   ```
+5. Open a pull request.
+
+## Contact
+
+For questions or feedback, please contact:
+
+- **Email**: arie.maharucha.zakka@example.com
+- **GitHub**: [Ariemaharrucha](https://github.com/Ariemaharrucha)
+
