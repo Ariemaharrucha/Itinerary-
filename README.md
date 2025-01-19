@@ -72,6 +72,6 @@ We welcome contributions! Follow these steps to contribute:
 
 For questions or feedback, please contact:
 
-- **Email**: arie.maharucha.zakka@example.com
+- **Email**: arie.maharucha.zakka@gmail.com
 - **GitHub**: [Ariemaharrucha](https://github.com/Ariemaharrucha)
 
