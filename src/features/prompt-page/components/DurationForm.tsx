@@ -5,11 +5,13 @@ import useFormState from "@/store/useStore";
 
 export const DurationForm = () => {
   const { setStepData, stepData } = useFormState();
-  const [date, setDate] = React.useState<Date | undefined>(new Date());
+  const [date, setDate] = React.useState<{from: Date, to: Date} | undefined>(stepData.duration ?? undefined);
 
   const isValid = !!date;
   useEffect(() => {
-    setStepData("duration", date); 
+    if (date) {
+      setStepData("duration", date);
+    }; 
   }, [date, setStepData]);
   return (
     <section className=" w-2/3 m-auto ">
