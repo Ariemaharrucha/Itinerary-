@@ -45,7 +45,7 @@ export const usePreview = () => {
     travelPlan?.Catatan.forEach((note) => {
       const bulletPoint = `- ${note}`;
       const wrappedText = doc.splitTextToSize(bulletPoint, textWidth);
-      wrappedText.forEach((line) => {
+      wrappedText.forEach((line: string) => {
         addNewPageIfNeeded();
         doc.text(line, 15, yPosition);
         yPosition += 10;
@@ -92,7 +92,7 @@ export const usePreview = () => {
           }
           const bulletPoint = `- ${line}`;
           const wrappedText = doc.splitTextToSize(bulletPoint, textWidth);
-          wrappedText.forEach((item) => {
+          wrappedText.forEach((item: string) => {
             doc.text(item, 18, yPosition);
             yPosition += 10;
           });
@@ -109,7 +109,7 @@ export const usePreview = () => {
     travelPlan?.TipsTambahan.forEach((tips) => {
       const bulletPoint = `- ${tips}`;
       const wrappedText = doc.splitTextToSize(bulletPoint, textWidth);
-      wrappedText.forEach((line) => {
+      wrappedText.forEach((line: string) => {
         addNewPageIfNeeded();
         doc.text(line, 15, yPosition);
         yPosition += 10;

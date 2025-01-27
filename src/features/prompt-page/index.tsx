@@ -6,7 +6,6 @@ import { DurationForm } from "./components/DurationForm";
 import { TypeForm } from "./components/TypeForm";
 import { Interested } from "./components/Interested";
 import { Toaster } from "@/components/ui/toaster"
-import { Button } from "@/components/ui/button";
 import { X } from 'lucide-react';
 import { Link } from "react-router-dom";
 

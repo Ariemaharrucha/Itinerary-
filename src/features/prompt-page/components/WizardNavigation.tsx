@@ -28,7 +28,7 @@ export const WizardNavigation: React.FC<WizardNavigationProps> = ({
     }
 
     if (isLastStep) {
-      onSubmit();
+      if(onSubmit) onSubmit();
     } else {
       nextStep(); 
     }
