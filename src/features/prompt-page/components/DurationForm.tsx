@@ -2,10 +2,11 @@ import { Calendar } from "@/components/ui/calendar";
 import { WizardNavigation } from "./WizardNavigation";
 import React, { useEffect } from "react";
 import useFormState from "@/store/useStore";
+import { DateRange } from "react-day-picker";
 
 export const DurationForm = () => {
   const { setStepData, stepData } = useFormState();
-  const [date, setDate] = React.useState<{ from: Date; to: Date } | undefined>(
+  const [date, setDate] = React.useState<DateRange | undefined>(
     stepData?.duration ?? undefined
   );
 
@@ -27,7 +28,6 @@ export const DurationForm = () => {
           mode="range"
           selected={date}
           onSelect={setDate}
-          required
           disabled={{ before: new Date() }}
         />
       </div>

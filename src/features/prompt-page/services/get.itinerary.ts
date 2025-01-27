@@ -1,5 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import axios from "axios";
 import { getItinerary } from "../api/api-itinerary";
 
 interface IData {
