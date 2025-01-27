@@ -1,16 +1,23 @@
-import useFormState from "@/store/useStore";
-
-import { LibraryBig, NotebookPen, Notebook, CircleDollarSign } from 'lucide-react';
+import {
+  LibraryBig,
+  NotebookPen,
+  Notebook,
+  CircleDollarSign,
+} from "lucide-react";
 import { CardDescription } from "./components/CardDescription";
 import { CardItinerary } from "./components/CardItinerary";
+import { Button } from "@/components/ui/button";
+import { usePreview } from "./hooks/usePreview";
 
 export const Preview = () => {
-  const { travelPlan } = useFormState();
+  const { travelPlan, handleDownloadPdf } = usePreview();
+
   return (
     <div className=" font-roboto">
       <div className="container mx-auto min-h-screen pb-2 ">
-        <header className="text-center p-4">
-          <p className="text-lg">Hasil</p>
+        <header className="text-center p-4 flex gap-4 justify-between items-center">
+          <p className="text-4xl">Hasil</p>
+          <Button onClick={handleDownloadPdf}>Download pdf</Button>
         </header>
         <div>
           {/* informas umum dan catatan */}
@@ -19,13 +26,13 @@ export const Preview = () => {
               title="Informasi Umum"
               items={travelPlan?.InformasiUmum}
               clasName="w-2/4"
-              icon={<LibraryBig/>}
+              icon={<LibraryBig />}
             />
             <CardDescription
               title="Catatan"
               items={travelPlan?.Catatan}
               clasName="w-full"
-              icon={<Notebook/>}
+              icon={<Notebook />}
             />
           </div>
 
@@ -38,19 +45,19 @@ export const Preview = () => {
               title="Tips Tambahan"
               items={travelPlan?.TipsTambahan}
               clasName="row-span-3"
-              icon={<NotebookPen/>}
+              icon={<NotebookPen />}
             />
             <CardDescription
               title="Estimasi Total Biaya"
               items={travelPlan?.EstimasiTotalBiaya}
               clasName="row-span-2 col-span-2"
-              icon={<CircleDollarSign/>}
+              icon={<CircleDollarSign />}
             />
             <CardDescription
               title="Sisa Anggaran"
               items={travelPlan?.SisaAnggaran}
               clasName="col-span-2"
-              icon={<CircleDollarSign/>}
+              icon={<CircleDollarSign />}
             />
           </div>
         </div>
